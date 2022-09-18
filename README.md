@@ -1,13 +1,25 @@
-# Sample Hardhat Project
+# Biblioteca
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+Smart Contract Library
 
-Try running some of the following tasks:
+## Examples
 
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.js
+### Fee Token
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+import "biblioteca/contracts/FeeToken.sol";
+
+contract MyFeeToken is FeeToken
+{
+    constructor() FeeToken("My Token", "MTKN", // Name and Symbol
+        address(this), // Vault Address
+        100, 200, 0,   // Fees: 2% buy 1% sell 0% P2P
+        0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address
+        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) // Base Token Address
+    {
+    }
+}
 ```
