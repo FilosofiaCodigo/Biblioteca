@@ -1,6 +1,6 @@
 {
   "name": "biblioteca",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/providers": "^5.7.1",
