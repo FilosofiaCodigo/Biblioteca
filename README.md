@@ -2,6 +2,12 @@
 
 Smart Contract Library
 
+## Keep in mind
+
+* This contracts are based on OpenZeppelin libraries but changed `private` variables to `internal` for flexibility
+* All contracts are `Ownable`
+* All percentage numbers are 2 digit decimals (e.g. 150 percent is 1.5%)
+
 ## Examples
 
 ### Fee Token
@@ -14,9 +20,9 @@ import "biblioteca/contracts/FeeToken.sol";
 
 contract MyFeeToken is FeeToken
 {
-    constructor() FeeToken("My Token", "MTKN", // Name and Symbol
-        address(this), // Vault Address
-        100, 200, 0,   // Fees: 2% buy 1% sell 0% P2P
+    constructor() FeeToken("My Token", "MTKN",      // Name and Symbol
+        address(this),                              // Vault Address
+        100, 200, 0,                                // Fees: 2% buy 1% sell 0% P2P
         0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address
         0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) // Base Token Address
     {

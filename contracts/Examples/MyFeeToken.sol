@@ -3,7 +3,7 @@
 
 pragma solidity 0.8.17;
 
-import "./FeeToken.sol";
+import "../FeeToken.sol";
 
 contract MyFeeToken is FeeToken
 {
