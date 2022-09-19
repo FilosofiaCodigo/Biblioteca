@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "../UniswapV2/UniswapV2FeeToken.sol";
+import "../ERC20/UniswapV2FeeToken.sol";
 
 contract MyFeeToken is UniswapV2FeeToken
 {

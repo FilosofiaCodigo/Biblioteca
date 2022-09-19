@@ -16,7 +16,7 @@ Smart Contract Library
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "biblioteca/contracts/FeeToken.sol";
+import "biblioteca/contracts/ERC20/UniswapV2FeeToken.sol";
 
 contract MyFeeToken is FeeToken
 {
@@ -38,7 +38,7 @@ contract MyFeeToken is FeeToken
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "../UniswapV2/UniswapV2AutoSwapToken.sol";
+import "biblioteca/contracts/ERC20/UniswapV2AutoSwapToken.sol";
 
 contract MyFeeToken is UniswapV2AutoSwapToken
 {
