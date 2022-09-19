@@ -82,9 +82,10 @@ contract ERC20 is Context, IERC20, IERC20Metadata, Ownable {
     string private _name;
     string private _symbol;
 
-    constructor(string memory name_, string memory symbol_) {
+    constructor(string memory name_, string memory symbol_, uint totalSupply_) {
         _name = name_;
         _symbol = symbol_;
+        _mint(msg.sender, totalSupply_);
     }
 
     function name() public view virtual override returns (string memory) {

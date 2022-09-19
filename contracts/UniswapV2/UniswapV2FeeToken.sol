@@ -3,39 +3,37 @@
 
 pragma solidity ^0.8.0;
 
-import "./ERC20.sol";
+import "../ERC20.sol";
+import "./UniswapV2Interfaces.sol";
 
-interface ISwapRouter {
-    function factory() external pure returns (address);
-}
-
-interface ISwapFactory {
-    function createPair(address tokenA, address tokenB) external returns (address pair);
-}
-
-abstract contract FeeToken is ERC20
+abstract contract UniswapV2FeeToken is ERC20
 {
     mapping(address => bool) public isTaxless;
-    address public vaultAddress;
+    address public tokenVaultAddress;
     bool public isFeeActive;
     address public pair;
     uint[] public fees;
     uint public feeDecimals = 2;
+    ISwapRouter router;
+    IERC20 baseToken;
+
 
     constructor(string memory name, string memory symbol,
-        address _vaultAddress,
+        uint totalSupply_,
+        address tokenVaultAddress_,
         uint buyFee, uint sellFee, uint p2pFee,
         address routerAddress,
-        address baseTokenAddress) ERC20(name, symbol)
+        address baseTokenAddress) ERC20(name, symbol, totalSupply_)
     {
-        ISwapRouter router = ISwapRouter(routerAddress);
+        router = ISwapRouter(routerAddress);
         pair = ISwapFactory(router.factory()).createPair(address(this), baseTokenAddress);
+        baseToken = IERC20(baseTokenAddress);
     
-        vaultAddress = _vaultAddress;
+        tokenVaultAddress = tokenVaultAddress_;
         
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
-        isTaxless[vaultAddress] = true;
+        isTaxless[tokenVaultAddress] = true;
         isTaxless[address(0)] = true;
 
         fees[0] = buyFee;
@@ -60,9 +58,9 @@ abstract contract FeeToken is ERC20
 
         amount -= feesCollected;
         _balances[from] -= feesCollected;
-        _balances[vaultAddress] += feesCollected;
+        _balances[tokenVaultAddress] += feesCollected;
 
-        emit Transfer(from, vaultAddress, amount);
+        emit Transfer(from, tokenVaultAddress, amount);
     
         super._transfer(from, to, amount);
     }
@@ -71,7 +69,7 @@ abstract contract FeeToken is ERC20
         isTaxless[account] = value;
     }
 
-    function setFeeActive(bool value) external onlyOwner {
+    function setFeeActive(bool value) public onlyOwner {
         isFeeActive = value;
     }
 }
