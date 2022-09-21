@@ -1,6 +1,18 @@
 {
   "name": "biblioteca",
   "version": "0.0.5",
+  "keywords": [
+    "solidity",
+    "ethereum",
+    "smart",
+    "contracts",
+    "security",
+    "filosofia",
+    "codigo",
+    "filosofía",
+    "código",
+    "biblioteca"
+  ],
   "devDependencies": {
     "@ethersproject/abi": "^5.7.0",
     "@ethersproject/providers": "^5.7.1",
