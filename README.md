@@ -1,6 +1,6 @@
-# Biblioteca
+# Filosofía Códigos's Biblioteca
 
-Smart Contract Library
+**A library for avant-garde smart contract development**. Build fresh smart contracts on top of battetested code.
 
 ## Keep in mind
 
@@ -59,11 +59,6 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
 ### Balancer V2 Fee Token
 
 ```solidity
-// SPDX-License-Identifier: MIT
-pragma solidity 0.8.17;
-
-import "biblioteca/contracts/ERC20/BalancerV2FeeToken.sol";
-
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
