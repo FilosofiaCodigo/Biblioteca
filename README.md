@@ -62,7 +62,7 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "../ERC20/BalancerV2FeeToken.sol";
+import "biblioteca/contracts/ERC20/BalancerV2FeeToken.sol";
 
 contract MyBalancerFeeToken is BalancerV2FeeToken
 {
