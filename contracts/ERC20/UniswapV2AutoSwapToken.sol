@@ -33,9 +33,9 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
 
     modifier lockTheSwap() {
         lastFeeActive = isFeeActive;
-        setFeeActive(false);
+        _setFeeActive(false);
         _;
-        setFeeActive(lastFeeActive);
+        _setFeeActive(lastFeeActive);
     }
 
     function swap() private lockTheSwap {

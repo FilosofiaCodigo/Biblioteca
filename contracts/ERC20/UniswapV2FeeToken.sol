@@ -9,18 +9,18 @@ import "./UniswapV2Interfaces.sol";
 abstract contract UniswapV2FeeToken is ERC20
 {
     mapping(address => bool) public isTaxless;
-    address public tokenVaultAddress;
+    address public feeReceiverAddress;
     bool public isFeeActive;
-    address public pair;
     uint[] public fees;
     uint public feeDecimals = 2;
+    address public pair;
     ISwapRouter router;
     IERC20 baseToken;
 
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
-        address tokenVaultAddress_,
+        address feeReceiverAddress_,
         uint buyFee, uint sellFee, uint p2pFee,
         address routerAddress,
         address baseTokenAddress) ERC20(name, symbol, totalSupply_)
@@ -29,11 +29,11 @@ abstract contract UniswapV2FeeToken is ERC20
         pair = ISwapFactory(router.factory()).createPair(address(this), baseTokenAddress);
         baseToken = IERC20(baseTokenAddress);
     
-        tokenVaultAddress = tokenVaultAddress_;
+        feeReceiverAddress = feeReceiverAddress_;
         
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
-        isTaxless[tokenVaultAddress] = true;
+        isTaxless[feeReceiverAddress] = true;
         isTaxless[address(0)] = true;
 
         fees[0] = buyFee;
@@ -47,7 +47,8 @@ abstract contract UniswapV2FeeToken is ERC20
         address from,
         address to,
         uint256 amount
-    ) internal virtual override {
+    ) internal virtual override
+    {
         uint256 feesCollected;
         if (isFeeActive && !isTaxless[from] && !isTaxless[to]) {
             bool sell = to == pair;
@@ -58,18 +59,43 @@ abstract contract UniswapV2FeeToken is ERC20
 
         amount -= feesCollected;
         _balances[from] -= feesCollected;
-        _balances[tokenVaultAddress] += feesCollected;
+        _balances[feeReceiverAddress] += feesCollected;
 
-        emit Transfer(from, tokenVaultAddress, amount);
+        emit Transfer(from, feeReceiverAddress, amount);
     
         super._transfer(from, to, amount);
     }
 
-    function setTaxless(address account, bool value) external onlyOwner {
-        isTaxless[account] = value;
+    function _setTaxless(address account, bool isTaxless_) internal
+    {
+        isTaxless[account] = isTaxless_;
     }
 
-    function setFeeActive(bool value) public onlyOwner {
-        isFeeActive = value;
+    function _setFeeReceiverAddress(address feeReceiverAddress_) internal
+    {
+        feeReceiverAddress = feeReceiverAddress_;
+    }
+
+    function _setFeeActive(bool isFeeActive_) internal
+    {
+        isFeeActive = isFeeActive_;
+    }
+
+    function _setPair(address router_, address baseToken_) internal
+    {
+        router = ISwapRouter(router_);
+        baseToken = IERC20(baseToken_);
+        pair = ISwapFactory(router.factory()).getPair(address(this), address(baseToken));
+        if(pair == address(0))
+        {
+            pair = ISwapFactory(router.factory()).createPair(address(this), address(baseToken));
+        }
+    }
+
+    function _setFees(uint buyFee, uint sellFee, uint p2pFee) internal
+    {
+        fees[0] = buyFee;
+        fees[1] = sellFee;
+        fees[2] = p2pFee;
     }
 }
