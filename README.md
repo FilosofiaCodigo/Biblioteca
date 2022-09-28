@@ -1,5 +1,7 @@
 # Filosofía Códigos's Biblioteca
 
+![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
+
 **A library for avant-garde smart contract development**. Build fresh smart contracts on top of battetested code.
 
 ## Keep in mind
