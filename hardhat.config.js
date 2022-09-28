@@ -7,7 +7,7 @@ module.exports = {
   networks: {
     hardhat: {
       forking: {
-        url: process.env.RPC_URL,
+        url: process.env.MAINNET_RPC_URL,
       }
     }
   }
