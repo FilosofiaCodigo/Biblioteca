@@ -2,7 +2,7 @@
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
 
-**A library for avant-garde smart contract development**. Build fresh smart contracts on top of battetested code.
+**A library for interoperable smart contract development**. Build fresh smart contracts connected to a variety of decentralized protocols.
 
 ## Keep in mind
 
