@@ -14,6 +14,8 @@
 
 ### Uniswap V2 Fee Token
 
+ERC20 token that takes fees on P2P, buy and sell on Uniswap V2 and transfer them to a Vault.
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
@@ -37,6 +39,8 @@ contract MyUniswapV2FeeToken is UniswapV2FeeToken
 
 ### Uniswap V2 AutoSwap Token
 
+ERC20 token that takes fees on P2P, buy and sell on Uniswap V2, converts them to Base Tokens and transfer them to a Vault.
+
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
@@ -50,7 +54,7 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
         1_000_000_000 ether,                        // 1 billion supply
         100, 200, 0,                                // Fees: 2% buy 1% sell 0% P2P
         0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address
-        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48,// Base Token Address
+        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48, // Base Token Address
         msg.sender,                                 // AutoSwap Recipient
         100)                                        // 1% in tokens before swap percent
     {
@@ -59,6 +63,8 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
 ```
 
 ### Balancer V2 Fee Token
+
+ERC20 token that takes fees on P2P, buy and sell on Balancer and transfer them to a Vault.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -79,6 +85,8 @@ contract MyBalancerFeeToken is BalancerV2FeeToken
 ```
 
 ### Uniswap V3 Fee Token
+
+ERC20 token that takes fees on P2P, and buy on Uniswap V3 and transfer them to a Vault.
 
 ```solidity
 // SPDX-License-Identifier: MIT
