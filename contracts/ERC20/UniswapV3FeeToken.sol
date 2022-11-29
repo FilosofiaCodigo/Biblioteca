@@ -20,13 +20,13 @@ abstract contract UniswapV3FeeToken is ERC20
     address public pool3;
     address public pool4;
 
-    INonfungiblePositionManager public nonfungiblePositionManager;
+    INonfungiblePositionManager public nonfungiblePositionManager
+        = INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
         address tokenVaultAddress_,
         uint buyFee_, uint p2pFee_,
-        address nonfungiblePositionManagerAddress,
         address baseTokenAddress,
         uint160 rate) ERC20(name, symbol, totalSupply_)
     {
@@ -45,9 +45,6 @@ abstract contract UniswapV3FeeToken is ERC20
         isTaxless[address(this)] = true;
         isTaxless[tokenVaultAddress] = true;
         isTaxless[address(0)] = true;
-
-        nonfungiblePositionManager
-            = INonfungiblePositionManager(nonfungiblePositionManagerAddress);
 
         address token0;
         address token1;

@@ -21,7 +21,7 @@ abstract contract UniswapV2FeeToken is ERC20
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
         address feeReceiverAddress_,
-        uint buyFee, uint sellFee, uint p2pFee,
+        uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
         address routerAddress,
         address baseTokenAddress) ERC20(name, symbol, totalSupply_)
     {
@@ -36,9 +36,9 @@ abstract contract UniswapV2FeeToken is ERC20
         isTaxless[feeReceiverAddress] = true;
         isTaxless[address(0)] = true;
 
-        fees[0] = buyFee;
-        fees[1] = sellFee;
-        fees[2] = p2pFee;
+        fees[0] = buyFeePercentage;
+        fees[1] = sellFeePercentage;
+        fees[2] = p2pFeePercentage;
         
         isFeeActive = true;
     }
@@ -92,10 +92,10 @@ abstract contract UniswapV2FeeToken is ERC20
         }
     }
 
-    function _setFees(uint buyFee, uint sellFee, uint p2pFee) internal
+    function _setFees(uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage) internal
     {
-        fees[0] = buyFee;
-        fees[1] = sellFee;
-        fees[2] = p2pFee;
+        fees[0] = buyFeePercentage;
+        fees[1] = sellFeePercentage;
+        fees[2] = p2pFeePercentage;
     }
 }
