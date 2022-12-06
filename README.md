@@ -8,10 +8,10 @@
 
 | Contract | Released | Has video | Unit Tests | Audit |
 |----------|----------|-----------|------------|-------|
-| Uniswap V2 Fee Token | ✅ | ❌ | ❌ | ❌ |
-| Uniswap V2 AutoSwap Token | ✅ | ❌ | ✅ | ❌ |
-| Balancer V2 Fee Token | ✅ | ❌ | ❌ | ❌ |
-| Uniswap V3 Fee Token | ✅ | ❌ | ✅ | ❌ |
+| Uniswap V2 Fee Token | ✔ | ❌ | ❌ | ❌ |
+| Uniswap V2 AutoSwap Token | ✔ | ❌ | ✔ | ❌ |
+| Balancer V2 Fee Token | ✔ | ❌ | ❌ | ❌ |
+| Uniswap V3 Fee Token | ✔ | ❌ | ✔ | ❌ |
 | NFT Collection | ❌| ❌ | ❌ | ❌ |
 | Aave Interface | ❌ | ❌ | ❌ | ❌ |
 | Sudoswap Interface | ❌ | ❌ | ❌ | ❌ |
