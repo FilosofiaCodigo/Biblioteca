@@ -9,9 +9,9 @@ import "./UniswapV2Interfaces.sol";
 abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
 {
     uint256 public minTokensBeforeSwap;
+    address public autoSwapRecipient;
     bool lastFeeActive;
     event Swap(uint amountSent);
-    address autoSwapRecipient;
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
@@ -41,21 +41,20 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
     function swap() private lockTheSwap {
         uint totalSwap = balanceOf(address(this));
         if(minTokensBeforeSwap > totalSwap) return;
+        if(totalSwap <= 0) return;
 
         address[] memory sellPath = new address[](2);
         sellPath[0] = address(this);
         sellPath[1] = address(baseToken);       
 
         _approve(address(this), address(router), totalSwap);
-        router.swapExactTokensForETHSupportingFeeOnTransferTokens(
+        router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
             totalSwap,
             0,
             sellPath,
-            address(this),
+            autoSwapRecipient,
             block.timestamp
         );
-
-        if(address(this).balance > 0) sendViaCall(payable(autoSwapRecipient), address(this).balance);
         
         emit Swap(totalSwap);
     }
@@ -65,16 +64,14 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
         address to,
         uint256 amount
     ) internal virtual override {
+        if(isFeeActive)
+        {
+            swap();
+        }
         super._transfer(from, to, amount);
     }
 
     function setMinTokensBeforeSwapPercent(uint256 percentage) public onlyOwner {
         minTokensBeforeSwap = (totalSupply() * percentage) / (10**(feeDecimals + 2));
-    }
-
-    function sendViaCall(address payable _to, uint amount) private {
-        (bool sent, bytes memory data) = _to.call{value: amount}("");
-        data;
-        require(sent, "Failed to send Ether");
     }
 }

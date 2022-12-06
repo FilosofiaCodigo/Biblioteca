@@ -36,9 +36,9 @@ abstract contract UniswapV2FeeToken is ERC20
         isTaxless[feeReceiverAddress] = true;
         isTaxless[address(0)] = true;
 
-        fees[0] = buyFeePercentage;
-        fees[1] = sellFeePercentage;
-        fees[2] = p2pFeePercentage;
+        fees.push(buyFeePercentage);
+        fees.push(sellFeePercentage);
+        fees.push(p2pFeePercentage);
         
         isFeeActive = true;
     }
