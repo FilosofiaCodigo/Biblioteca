@@ -4,11 +4,27 @@
 
 **A library for interoperable smart contract development**. Build fresh smart contracts connected to a variety of decentralized protocols.
 
+## Contracts
+
+| Contract | Released | Has video | Unit Tests | Audit |
+|----------|----------|-----------|------------|-------|
+| Uniswap V2 Fee Token | ✅ | ❌ | ❌ | ❌ |
+| Uniswap V2 AutoSwap Token | ✅ | ❌ | ✅ | ❌ |
+| Balancer V2 Fee Token | ✅ | ❌ | ❌ | ❌ |
+| Uniswap V3 Fee Token | ✅ | ❌ | ✅ | ❌ |
+| NFT Collection | ❌| ❌ | ❌ | ❌ |
+| Aave Interface | ❌ | ❌ | ❌ | ❌ |
+| Sudoswap Interface | ❌ | ❌ | ❌ | ❌ |
+
 ## Keep in mind
 
 * This contracts are based on OpenZeppelin libraries but changed `private` variables to `internal` for flexibility
 * All contracts are `Ownable`
 * All percentage numbers are 2 digit decimals (e.g. 150 percent is 1.5%)
+
+## Important!
+
+Many libraries are not audited. Use at your own risk! Also, PRs and upstream changes very welcome.
 
 ## ERC20 Tokens
 
