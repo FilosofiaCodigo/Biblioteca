@@ -1,17 +1,9 @@
 // SPDX-License-Identifier: MIT
-// Filosofía Código Contracts based on OpenZeppelin (Ownable.sol)
+// Filosofía Código Contracts based on OpenZeppelin
 
 pragma solidity ^0.8.0;
 
-abstract contract Context {
-    function _msgSender() internal view virtual returns (address) {
-        return msg.sender;
-    }
-
-    function _msgData() internal view virtual returns (bytes calldata) {
-        return msg.data;
-    }
-}
+import "./Context.sol";
 
 abstract contract Ownable is Context {
     address private _owner;

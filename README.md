@@ -2,7 +2,7 @@
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
 
-**A library for interoperable smart contract development**. Build fresh smart contracts connected to a variety of decentralized protocols.
+**A library for interoperable smart contract development**. Build smart contracts integrated to a variety of decentralized protocols.
 
 ## Contracts
 
@@ -12,7 +12,8 @@
 | Uniswap V2 AutoSwap Token | ✔ | ❌ | ✔ | ❌ |
 | Balancer V2 Fee Token | ✔ | ❌ | ❌ | ❌ |
 | Uniswap V3 Fee Token | ✔ | ❌ | ✔ | ❌ |
-| NFT Collection | ❌| ❌ | ❌ | ❌ |
+| OpenZeppelin NFT Collection | ✔| ❌ | ❌ | ❌ |
+| Azuki NFT Collection | ✔| ❌ | ❌ | ❌ |
 | Aave Interface | ❌ | ❌ | ❌ | ❌ |
 | Sudoswap Interface | ❌ | ❌ | ❌ | ❌ |
 
@@ -119,6 +120,52 @@ contract MyUniswapV3FeeToken is UniswapV3FeeToken
         100, 200,                                   // Fees: 1% buy 2% P2P
         0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2, // Base token: WETH
         1000)                                       // Initial rate: 1 Base Tokens = 1000 tokens
+    {
+    }
+}
+```
+
+## NFT Collections
+
+### OpenZeppelin NFT Collection
+
+NFT collection with a mint price and max supply. Uses OpenZeppelin library wich is more adopted and save transfer gas fees compared to Azuki's ERC721a.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+import "biblioteca/contracts//ERC721/OpenZeppelinNFTCollection.sol";
+
+contract MyOpenZeppelinNFTCollection is OpenZeppelinNFTCollection
+{
+    constructor() OpenZeppelinNFTCollection(
+        "My NFT Collection", "MNFT",    // Name and Symbol
+        "https://raw.githubusercontent.com/FilosofiaCodigo/nft-collection-api/master/metadata/",    // Base Metadata URI
+        10_000,         // 10,000 max supply
+        0.01 ether)     // 0.01 eth mint price
+    {
+    }
+}
+```
+
+### Azuki ERC721a NFT Collection
+
+NFT collection with a mint price and max supply. Uses ERC721a library wich is more newer and save batch mint gas fees compared to OpenZeppelin's ERC721 implementation.
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.17;
+
+import "biblioteca/contracts//ERC721/ERC721aCollection.sol";
+
+contract MyERC721aCollection is ERC721aCollection
+{
+    constructor() ERC721aCollection(
+        "My NFT Collection", "MNFT",    // Name and Symbol
+        "https://raw.githubusercontent.com/FilosofiaCodigo/nft-collection-api/master/metadata/",    // Base Metadata URI
+        10_000,         // 10,000 max supply
+        0.01 ether)     // 0.01 eth mint price
     {
     }
 }

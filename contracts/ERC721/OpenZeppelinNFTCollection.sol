@@ -3,13 +3,16 @@
 
 pragma solidity ^0.8.0;
 
-import "./ERC721a.sol";
+import "./ERC721.sol";
+import "../common/Counters.sol";
 
-contract ERC721aCollection is ERC721A
-{
+contract OpenZeppelinNFTCollection is BibliotecaERC721 {
     string BASE_URI;
     uint MAX_SUPPLY;
     uint PRICE;
+
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
 
     // Constructor
 
@@ -19,7 +22,7 @@ contract ERC721aCollection is ERC721A
         string memory base_uri,
         uint max_supply,
         uint _price
-    ) ERC721A(name, symbol)
+    ) ERC721(name, symbol)
     {
         BASE_URI = base_uri;
         MAX_SUPPLY = max_supply;
@@ -32,7 +35,11 @@ contract ERC721aCollection is ERC721A
     {
         require(msg.value == price()*amount, "Invalid payment");
         require(totalSupply() + amount < maxSupply(), "Max supply reached");
-        _safeMint(account, amount);
+        for(uint i; i<amount; i++)
+        {
+            _safeMint(account, _tokenIds.current());
+            _tokenIds.increment();
+        }
     }
 
     // Owner functions
