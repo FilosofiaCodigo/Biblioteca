@@ -65,7 +65,7 @@ describe("Uniswap V3 Fee Token", function () {
     let tickSpacing = parseInt(await pool.tickSpacing())
     let nearestTick = getNearestUsableTick(parseInt(slot0.tick),tickSpacing)
 
-    if(myUniswapV3FeeToken.address < weth.address)
+    if(myUniswapV3FeeToken.address.toLowerCase() < weth.address.toLowerCase())
     {
       token0 = myUniswapV3FeeToken.address
       token1 = weth.address
