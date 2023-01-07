@@ -24,16 +24,16 @@
      inkscape:pagecheckerboard="0"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.77428426"
-     inkscape:cx="169.18851"
-     inkscape:cy="52.952129"
+     inkscape:zoom="0.59648701"
+     inkscape:cx="149.20694"
+     inkscape:cy="-155.91287"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
-     inkscape:snap-global="false" />
+     inkscape:snap-global="true" />
   <defs
      id="defs2">
     <rect
@@ -47,6 +47,33 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.201458"
+       id="rect11833"
+       width="66.145836"
+       height="66.145836"
+       x="15.003293"
+       y="-38.53334"
+       rx="7.9888864"
+       ry="7.9888864" />
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.201458"
+       id="rect11835"
+       width="66.145836"
+       height="66.145836"
+       x="101.36281"
+       y="-38.53334"
+       rx="7.9888864"
+       ry="7.9888864" />
+    <rect
+       style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.201458"
+       id="rect11751"
+       width="66.145836"
+       height="66.145836"
+       x="-71.356224"
+       y="-38.53334"
+       rx="7.9888864"
+       ry="7.9888864" />
     <rect
        style="fill:#ffffff;stroke-width:0.0371655"
        id="rect951"
@@ -207,33 +234,14 @@
        id="path5745"
        d="" />
     <rect
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.201458"
+       style="fill:#999999;fill-opacity:1;stroke:none;stroke-width:0.201458"
        id="rect11353"
        width="66.145836"
        height="66.145836"
        x="-151.77161"
-       y="-38.53334" />
-    <rect
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.201458"
-       id="rect11479"
-       width="66.145836"
-       height="66.145836"
-       x="-71.356224"
-       y="-38.53334" />
-    <rect
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.201458"
-       id="rect11481"
-       width="66.145836"
-       height="66.145836"
-       x="15.003293"
-       y="-38.53334" />
-    <rect
-       style="fill:#cccccc;fill-opacity:1;stroke:none;stroke-width:0.201458"
-       id="rect11483"
-       width="66.145836"
-       height="66.145836"
-       x="101.36281"
-       y="-38.53334" />
+       y="-38.53334"
+       rx="7.9888864"
+       ry="7.9888864" />
     <image
        width="60.57671"
        height="60.57671"

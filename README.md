@@ -2,10 +2,9 @@
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
 
-A library for interoperable smart contract development**. Build smart contracts integrated to a variety of decentralized protocols.
-**Integrations library for smart contracts**. Build interopable smart contracts connected to a variety of decentralized protocols.
+Maximize interoperability for your smart contracts with the integrations library for decentralized protocols.
 
-## Contracts
+# Contracts
 
 | Origin | Contract | Released | Has video | Unit Tests | Audit |
 |-----|----------|----------|-----------|------------|-------|
@@ -18,19 +17,19 @@ A library for interoperable smart contract development**. Build smart contracts 
 | | Aave Interface | ❌ | ❌ | ❌ | ❌ |
 | | Sudoswap Interface | ❌ | ❌ | ❌ | ❌ |
 
-## 📝 Keep in mind
+# 📝 Keep in mind
 
 * This contracts are based on OpenZeppelin libraries but changed `private` variables to `internal` for flexibility
 * All contracts are `Ownable`
 * All percentage numbers are 2 digit decimals (e.g. 150 percent is 1.5%)
 
-## ⚠️ Important!
+# ⚠️ Important!
 
 Many libraries are not audited. Use at your own risk! Also, PRs and upstream changes very welcome.
 
-## 🪙 ERC20 Tokens
+# 🪙 ERC20 Tokens
 
-### Uniswap V2 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
+## Uniswap V2 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
 
 ERC20 token that takes fees on P2P, buy and sell on Uniswap V2 and transfer them to a Vault.
 
@@ -55,7 +54,7 @@ contract MyUniswapV2FeeToken is UniswapV2FeeToken
 ```
 
 
-### Uniswap V2 AutoSwap Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
+## Uniswap V2 AutoSwap Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
 
 ERC20 token that takes fees on P2P, buy and sell on Uniswap V2, converts them to Base Tokens and transfer them to a Vault.
 
@@ -80,7 +79,7 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
 }
 ```
 
-### Balancer V2 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/>
+## Balancer V2 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/>
 
 ERC20 token that takes fees on P2P, buy and sell on Balancer and transfer them to a Vault.
 
@@ -102,7 +101,7 @@ contract MyBalancerFeeToken is BalancerV2FeeToken
 }
 ```
 
-### Uniswap V3 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
+## Uniswap V3 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
 
 ERC20 token that takes fees on P2P, and buy on Uniswap V3 and transfer them to a Vault.
 
@@ -126,9 +125,9 @@ contract MyUniswapV3FeeToken is UniswapV3FeeToken
 }
 ```
 
-## 🖼️ NFT Collections
+# 🖼️ NFT Collections
 
-### OpenZeppelin NFT Collection <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="50"/>
+## OpenZeppelin NFT Collection <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="50"/>
 
 NFT collection with a mint price and max supply. Uses OpenZeppelin library wich is more adopted and save transfer gas fees compared to Azuki's ERC721a.
 
@@ -150,7 +149,7 @@ contract MyOpenZeppelinNFTCollection is OpenZeppelinNFTCollection
 }
 ```
 
-### Azuki ERC721a NFT Collection <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="50"/>
+## Azuki ERC721a NFT Collection <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="50"/>
 
 NFT collection with a mint price and max supply. Uses ERC721a library wich is more newer and save batch mint gas fees compared to OpenZeppelin's ERC721 implementation.
 
