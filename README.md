@@ -4,7 +4,7 @@
 
 Maximize interoperability for your smart contracts with the integrations library for decentralized protocols.
 
-# Contracts
+# 📜 Contracts
 
 | Origin | Contract | Released | Has video | Unit Tests | Audit |
 |-----|----------|----------|-----------|------------|-------|
@@ -17,7 +17,7 @@ Maximize interoperability for your smart contracts with the integrations library
 | | Aave Interface | ❌ | ❌ | ❌ | ❌ |
 | | Sudoswap Interface | ❌ | ❌ | ❌ | ❌ |
 
-# 📝 Keep in mind
+# 📝 Take note
 
 * This contracts are based on OpenZeppelin libraries but changed `private` variables to `internal` for flexibility
 * All contracts are `Ownable`
@@ -29,7 +29,7 @@ Many libraries are not audited. Use at your own risk! Also, PRs and upstream cha
 
 # 🪙 ERC20 Tokens
 
-## Uniswap V2 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
+## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="20" /> Uniswap V2 Fee Token
 
 ERC20 token that takes fees on P2P, buy and sell on Uniswap V2 and transfer them to a Vault.
 
@@ -54,7 +54,7 @@ contract MyUniswapV2FeeToken is UniswapV2FeeToken
 ```
 
 
-## Uniswap V2 AutoSwap Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
+## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="20"/> Uniswap V2 AutoSwap Token
 
 ERC20 token that takes fees on P2P, buy and sell on Uniswap V2, converts them to Base Tokens and transfer them to a Vault.
 
@@ -79,7 +79,7 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
 }
 ```
 
-## Balancer V2 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/>
+## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="20"/> Balancer V2 Fee Token
 
 ERC20 token that takes fees on P2P, buy and sell on Balancer and transfer them to a Vault.
 
@@ -101,7 +101,7 @@ contract MyBalancerFeeToken is BalancerV2FeeToken
 }
 ```
 
-## Uniswap V3 Fee Token <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/>
+## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="20"/> Uniswap V3 Fee Token
 
 ERC20 token that takes fees on P2P, and buy on Uniswap V3 and transfer them to a Vault.
 
@@ -127,7 +127,7 @@ contract MyUniswapV3FeeToken is UniswapV3FeeToken
 
 # 🖼️ NFT Collections
 
-## OpenZeppelin NFT Collection <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="50"/>
+## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="20"/> OpenZeppelin NFT Collection
 
 NFT collection with a mint price and max supply. Uses OpenZeppelin library wich is more adopted and save transfer gas fees compared to Azuki's ERC721a.
 
@@ -149,7 +149,7 @@ contract MyOpenZeppelinNFTCollection is OpenZeppelinNFTCollection
 }
 ```
 
-## Azuki ERC721a NFT Collection <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="50"/>
+## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="20"/> Azuki ERC721a NFT Collection
 
 NFT collection with a mint price and max supply. Uses ERC721a library wich is more newer and save batch mint gas fees compared to OpenZeppelin's ERC721 implementation.
 
