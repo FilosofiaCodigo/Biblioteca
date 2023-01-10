@@ -33,7 +33,8 @@ jobs:
         run: |
           ls
           cat README.md
-          echo "olas" >> Readme.md
+          echo "<script>const BADGE_ID = 'UNIQUE ALCHEMY TEAM REFERRAL TOKEN HERE';</script>" >> README.md
+          echo "<script type="text/javascript" src="https://static.alchemyapi.io/scripts/analytics/badge-analytics.js"></script>" >> README.md
           cat README.md
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
@@ -42,6 +43,12 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+      - name: Olda
+        run: |
+          ls
+          cd ./_site
+          ls
+          cat index.html
 
   # Deployment job
   deploy:
