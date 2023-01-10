@@ -29,13 +29,6 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v2
-      - name: MyTest
-        run: |
-          ls
-          cat README.md
-          echo "<script>const BADGE_ID = 'UNIQUE ALCHEMY TEAM REFERRAL TOKEN HERE';</script>" >> README.md
-          echo "<script type="text/javascript" src="https://static.alchemyapi.io/scripts/analytics/badge-analytics.js"></script>" >> README.md
-          cat README.md
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
@@ -43,12 +36,10 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
-      - name: Olda
+      - name: Add Alchemy Badge Link & Analytics
         run: |
-          ls
-          cd ./_site
-          ls
-          cat index.html
+          echo "<script>const BADGE_ID = 'f59bbdc4-a004-494e-8c93-49467dd812a2';</script>" >> ./_site/index.html
+          echo "<script type="text/javascript" src="https://static.alchemyapi.io/scripts/analytics/badge-analytics.js"></script>" >> ./_site/index.html
 
   # Deployment job
   deploy:
