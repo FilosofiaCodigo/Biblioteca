@@ -2,7 +2,7 @@
 
 <a href="#"><img onclick=logBadgeClick() id="badge-button" style="width:240px;height:53px" src="https://static.alchemyapi.io/images/marketing/badgeLight.png" alt="Alchemy Supercharged"></img></a>
 
-<img src="https://static.alchemyapi.io/images/marketing/badgeLight.png" alt="" /></img>
+<a href="#"><img src="https://static.alchemyapi.io/images/marketing/badgeLight.png" alt="" /></a>
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
 
