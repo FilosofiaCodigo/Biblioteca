@@ -38,6 +38,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
       - name: Add Alchemy Badge Link & Analytics
         run: |
+          chmod gu+w ./_site/index.html
           echo "<script>const BADGE_ID = 'f59bbdc4-a004-494e-8c93-49467dd812a2';</script>" >> ./_site/index.html
           echo "<script type="text/javascript" src="https://static.alchemyapi.io/scripts/analytics/badge-analytics.js"></script>" >> ./_site/index.html
 
