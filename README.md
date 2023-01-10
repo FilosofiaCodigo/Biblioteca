@@ -2,24 +2,22 @@
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
 
-<a href="#">
-    <img onclick=logBadgeClick() id="badge-button" style="width:240px;height:53px" src="https://static.alchemyapi.io/images/marketing/badge.png" alt="Alchemy Supercharged" />
-</a>
+<a href="#"><img onclick=logBadgeClick() id="badge-button" style="width:240px;height:53px" src="https://static.alchemyapi.io/images/marketing/badgeLight.png" alt="Alchemy Supercharged" /></a>
 
 Maximize interoperability for your smart contracts with the integrations library for decentralized protocols.
 
 # 📜 Contracts
 
-| Origin | Contract | Released | Has video | Unit Tests | Audit |
-|-----|----------|----------|-----------|------------|-------|
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 Fee Token | ✔ | ❌ | ❌ | ❌ |
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 AutoSwap Token | ✔ | ❌ | ✔ | ❌ |
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/> | Balancer V2 Fee Token | ✔ | ❌ | ❌ | ❌ |
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V3 Fee Token | ✔ | ❌ | ✔ | ❌ |
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="50"/> | OpenZeppelin NFT Collection | ✔| ❌ | ❌ | ❌ |
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="50"/> | Azuki NFT Collection | ✔| ❌ | ❌ | ❌ |
-| | Aave Interface | ❌ | ❌ | ❌ | ❌ |
-| | Sudoswap Interface | ❌ | ❌ | ❌ | ❌ |
+| Origin | Contract | Released | Unit Tests | Audit |
+|-----|----------|-----------|------------|-------|
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 Fee Token | ✔ | ❌ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 AutoSwap Token | ✔ | ✔ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/> | Balancer V2 Fee Token | ✔ | ❌ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V3 Fee Token | ✔ | ✔ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="50"/> | OpenZeppelin NFT Collection | ✔ | ❌ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="50"/> | Azuki NFT Collection | ✔ | ❌ | ❌ |
+| | Aave Interface | ❌ | ❌ | ❌ |
+| | Sudoswap Interface | ❌ | ❌ | ❌ |
 
 # 📝 Take note
 
