@@ -2,6 +2,10 @@
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
 
+<a href="#">
+    <img onclick=logBadgeClick() id="badge-button" style="width:240px;height:53px" src="https://static.alchemyapi.io/images/marketing/badge.png" alt="Alchemy Supercharged" />
+</a>
+
 Maximize interoperability for your smart contracts with the integrations library for decentralized protocols.
 
 # 📜 Contracts
