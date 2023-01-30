@@ -4,6 +4,7 @@
 pragma solidity ^0.8.0;
 
 import "./ERC20.sol";
+import "./BalancerInterfaces.sol";
 
 abstract contract BalancerV2FeeToken is ERC20
 {
@@ -13,7 +14,6 @@ abstract contract BalancerV2FeeToken is ERC20
     uint[] public fees;
     uint public feeDecimals = 2;
     address public balancerVault = 0xBA12222222228d8Ba445958a75a0704d566BF2C8;
-
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
@@ -28,9 +28,9 @@ abstract contract BalancerV2FeeToken is ERC20
         isTaxless[tokenVaultAddress] = true;
         isTaxless[address(0)] = true;
 
-        fees[0] = buyFee;
-        fees[1] = sellFee;
-        fees[2] = p2pFee;
+        fees.push(buyFee);
+        fees.push(sellFee);
+        fees.push(p2pFee);
         
         isFeeActive = true;
     }

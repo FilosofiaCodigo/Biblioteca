@@ -10,9 +10,9 @@ Maximize interoperability for your smart contracts with the integrations library
 
 | Origin | Contract | Released | Unit Tests | Audit |
 |-----|----------|-----------|------------|-------|
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 Fee Token | ✔ | ❌ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 Fee Token | ✔ | ✔ | ❌ |
 | <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V2 AutoSwap Token | ✔ | ✔ | ❌ |
-| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/> | Balancer V2 Fee Token | ✔ | ❌ | ❌ |
+| <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="50"/> | Balancer V2 Fee Token | ✔ | ✔ | ❌ |
 | <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="50"/> | Uniswap V3 Fee Token | ✔ | ✔ | ❌ |
 | <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/openzeppelin.png" width="50"/> | OpenZeppelin NFT Collection | ✔ | ❌ | ❌ |
 | <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/azuki.png" width="50"/> | Azuki NFT Collection | ✔ | ❌ | ❌ |
