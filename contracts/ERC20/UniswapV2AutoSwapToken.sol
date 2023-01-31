@@ -4,30 +4,30 @@
 pragma solidity ^0.8.0;
 
 import "./UniswapV2FeeToken.sol";
-import "./UniswapV2Interfaces.sol";
+import "./interfaces/UniswapV2Interfaces.sol";
 
 abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
 {
     uint256 public minTokensBeforeSwap;
-    address public autoSwapRecipient;
+    address public autoSwapReciever;
     bool lastFeeActive;
     event Swap(uint amountSent);
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
-        uint buyFee, uint sellFee, uint p2pFee,
+        uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
+        address autoSwapReciever_,
         address routerAddress,
         address baseTokenAddress,
-        address autoSwapRecipient_,
         uint minTokensBeforeSwapPercent) UniswapV2FeeToken(name, symbol,
         totalSupply_,
+        buyFeePercentage, sellFeePercentage, p2pFeePercentage,
         address(this),
-        buyFee, sellFee, p2pFee,
         routerAddress,
         baseTokenAddress
         )
     {
-        autoSwapRecipient = autoSwapRecipient_;
+        autoSwapReciever = autoSwapReciever_;
         setMinTokensBeforeSwapPercent(minTokensBeforeSwapPercent);
     }
 
@@ -52,7 +52,7 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
             totalSwap,
             0,
             sellPath,
-            autoSwapRecipient,
+            autoSwapReciever,
             block.timestamp
         );
         

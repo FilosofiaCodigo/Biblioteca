@@ -60,7 +60,7 @@ describe("Uniswap V2 AutoSwap Token", function () {
       expect(
         ethers.utils.parseUnits("1000.0",6)
       ).to.lessThan(
-        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapRecipient())
+        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapReciever())
       );
     });
 
@@ -87,7 +87,7 @@ describe("Uniswap V2 AutoSwap Token", function () {
       expect(
         ethers.utils.parseUnits("990.0",6)
       ).to.lessThan(
-        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapRecipient())
+        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapReciever())
       );
     });
     it("Should collect fees on Sell", async function () {
@@ -109,12 +109,12 @@ describe("Uniswap V2 AutoSwap Token", function () {
       expect(
         ethers.utils.parseEther("0.0")
       ).to.lessThan(
-        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapRecipient())
+        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapReciever())
       );
       expect(
         ethers.utils.parseUnits("1000.0",6)
       ).to.lessThan(
-        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapRecipient())
+        await usdc.balanceOf(await myUniswapV2AutoSwapToken.autoSwapReciever())
       );
     });
   });

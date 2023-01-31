@@ -57,7 +57,7 @@ const {
         expect(
           ethers.utils.parseUnits("1000.0",6)
         ).to.lessThan(
-          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiverAddress())
+          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiver())
         );
       });
   
@@ -81,7 +81,7 @@ const {
         expect(
           ethers.utils.parseUnits("990.0",6)
         ).to.lessThan(
-          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiverAddress())
+          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiver())
         );
       });
       it("Should collect fees on Sell", async function () {
@@ -99,12 +99,12 @@ const {
         expect(
           ethers.utils.parseEther("0.0")
         ).to.lessThan(
-          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiverAddress())
+          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiver())
         );
         expect(
           ethers.utils.parseUnits("1000.0",6)
         ).to.lessThan(
-          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiverAddress())
+          await usdc.balanceOf(await myUniswapV2FeeToken.feeReceiver())
         );
       });
     });

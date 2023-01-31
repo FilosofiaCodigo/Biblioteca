@@ -4,7 +4,7 @@ Token that main liquidity will be added to a Uniswap V2 or to an equivalent fork
 
 ## Technical contract overview
 
-The UniswapV2FeeToken is a type of token very common in DeFi. It collects fees depending on the transaction type (Sell, Buy or P2P peer to peer). Fees are sent to a `feeReceiverAddress`. In the constructor a `router` and `baseToken` is set in order to create a uniswap `pair`. The `pair` helps us detecting wheter a transaction is Sell, Buy or P2P.
+The UniswapV2FeeToken is a type of token very common in DeFi. It collects fees depending on the transaction type (Sell, Buy or P2P peer to peer). Fees are sent to a `feeReceiver`. In the constructor a `router` and `baseToken` is set in order to create a uniswap `pair`. The `pair` helps us detecting wheter a transaction is Sell, Buy or P2P.
 
 ## Constructing a UniswapV2FeeToken contract
 
@@ -30,13 +30,13 @@ contract MyUniswapV2FeeToken is UniswapV2FeeToken
 
 ## API
 
-### **constructor**(string memory name, string memory symbol, uint totalSupply\_, address feeReceiverAddress\_, uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage, address routerAddress, address baseTokenAddress)
+### **constructor**(string memory name, string memory symbol, uint totalSupply\_, address feeReceiver\_, uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage, address routerAddress, address baseTokenAddress)
 
 Constructor parameters:
 * **name**: Token name
 * **symbol**: Token symbol
 * **totalSupply**: Initial supply in wei
-* **feeReceiverAddress**: Address that will receive fees collected
+* **feeReceiver**: Address that will receive fees collected
 * **buyFeePercentage**: Fee percentange collected when tokens are sent from the pair
 * **sellFeePercentage**: Fee percentange collected when the tokens are sent to the pair
 * **p2pFeePercentage**: Fee percentange collected when tokens are not sent from nor to the pair
@@ -66,14 +66,14 @@ function setTaxless(address account, bool isTaxless_) internal onlyOwner
 }
 ```
 
-### **\_setFeeReceiverAddress**(address feeReceiverAddress\_) internal
+### **\_setFeeReceiver**(address feeReceiver\_) internal
 
 Address that will receive the token Fees collected.
 
 ```solidity
-function setFeeReceiverAddress(address feeReceiverAddress_) internal onlyOwner
+function setFeeReceiver(address feeReceiver_) internal onlyOwner
 {
-  _setFeeReceiverAddress(feeReceiverAddress_);
+  _setFeeReceiver(feeReceiver_);
 }
 ```
 

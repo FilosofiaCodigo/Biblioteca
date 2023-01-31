@@ -4,12 +4,12 @@
 pragma solidity ^0.8.0;
 
 import "./ERC20.sol";
-import "./BalancerInterfaces.sol";
+import "./interfaces/BalancerInterfaces.sol";
 
 abstract contract BalancerV2FeeToken is ERC20
 {
     mapping(address => bool) public isTaxless;
-    address public tokenVaultAddress;
+    address public feeReceiver;
     bool public isFeeActive;
     uint[] public fees;
     uint public feeDecimals = 2;
@@ -17,20 +17,20 @@ abstract contract BalancerV2FeeToken is ERC20
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
-        address tokenVaultAddress_,
-        uint buyFee, uint sellFee, uint p2pFee)
+        uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
+        address feeReceiver_)
         ERC20(name, symbol, totalSupply_)
     {
-        tokenVaultAddress = tokenVaultAddress_;
+        feeReceiver = feeReceiver_;
         
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
-        isTaxless[tokenVaultAddress] = true;
+        isTaxless[feeReceiver] = true;
         isTaxless[address(0)] = true;
 
-        fees.push(buyFee);
-        fees.push(sellFee);
-        fees.push(p2pFee);
+        fees.push(buyFeePercentage);
+        fees.push(sellFeePercentage);
+        fees.push(p2pFeePercentage);
         
         isFeeActive = true;
     }
@@ -50,9 +50,9 @@ abstract contract BalancerV2FeeToken is ERC20
 
         amount -= feesCollected;
         _balances[from] -= feesCollected;
-        _balances[tokenVaultAddress] += feesCollected;
+        _balances[feeReceiver] += feesCollected;
 
-        emit Transfer(from, tokenVaultAddress, amount);
+        emit Transfer(from, feeReceiver, amount);
     
         super._transfer(from, to, amount);
     }

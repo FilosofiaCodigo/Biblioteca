@@ -124,7 +124,7 @@ describe("Uniswap V3 Fee Token", function () {
 
     it("Vault should collect about 10 tokens in fees", async function () {
       const { myUniswapV3FeeToken, nonfungiblePositionManager, router, pool, weth, deployer, user1, user2, user3 } = await loadFixture(addLiquidityFixiture);
-      var vaultTokenBeforeBuy = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.tokenVaultAddress()))
+      var vaultTokenBeforeBuy = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.feeReceiver()))
       buyParams = {
           tokenIn: weth.address,
           tokenOut: myUniswapV3FeeToken.address,
@@ -137,7 +137,7 @@ describe("Uniswap V3 Fee Token", function () {
       }
       await weth.connect(user1).approve(router.address, ethers.utils.parseEther("1"))
       await router.connect(user1).exactInputSingle(buyParams)
-      var vaultTokenAfterBuy = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.tokenVaultAddress()))
+      var vaultTokenAfterBuy = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.feeReceiver()))
       expect(vaultTokenAfterBuy - vaultTokenBeforeBuy).to.above(9);
     });
   });
@@ -172,7 +172,7 @@ describe("Uniswap V3 Fee Token", function () {
       
       await myUniswapV3FeeToken.transfer(user1.address, ethers.utils.parseEther("900"))
 
-      var vaultTokenBeforeSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.tokenVaultAddress()))
+      var vaultTokenBeforeSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.feeReceiver()))
 
       sellParams = {
         tokenIn: myUniswapV3FeeToken.address,
@@ -188,7 +188,7 @@ describe("Uniswap V3 Fee Token", function () {
       await myUniswapV3FeeToken.connect(user1).approve(router.address, ethers.utils.parseEther("1000"))
       await router.connect(user1).exactInputSingle(sellParams)
 
-      var vaultTokenAfterSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.tokenVaultAddress()))
+      var vaultTokenAfterSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.feeReceiver()))
       expect(vaultTokenAfterSell - vaultTokenBeforeSell).to.equal(0);
     });
   });
@@ -211,9 +211,9 @@ describe("Uniswap V3 Fee Token", function () {
 
       await myUniswapV3FeeToken.transfer(user1.address, ethers.utils.parseEther("1000"))
 
-      var vaultTokenBeforeSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.tokenVaultAddress()))
+      var vaultTokenBeforeSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.feeReceiver()))
       await myUniswapV3FeeToken.connect(user1).transfer(user2.address, ethers.utils.parseEther("1000"))
-      var vaultTokenAfterSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.tokenVaultAddress()))
+      var vaultTokenAfterSell = ethers.utils.formatEther(await myUniswapV3FeeToken.balanceOf(await myUniswapV3FeeToken.feeReceiver()))
 
       expect(vaultTokenAfterSell - vaultTokenBeforeSell).to.equal(20);
     });

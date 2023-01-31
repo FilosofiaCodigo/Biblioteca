@@ -46,10 +46,10 @@ contract MyUniswapV2FeeToken is UniswapV2FeeToken
     constructor() UniswapV2FeeToken(
         "My Token", "MTKN",                         // Name and Symbol
         1_000_000_000 ether,                        // 1 billion supply
-        address(this),                              // Vault Address
-        100, 200, 0,                                // Fees: 2% buy 1% sell 0% P2P
-        0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address
-        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) // Base Token Address
+        100, 200, 50,                               // Fees: 1% buy 2% sell 0.5% P2P
+        msg.sender,                                 // Fee Receiver
+        0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address: Uniswap V2
+        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48) // Base Token Address: USDC
     {
     }
 }
@@ -71,10 +71,10 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
     constructor() UniswapV2AutoSwapToken(
         "My Token", "MTKN",                         // Name and Symbol
         1_000_000_000 ether,                        // 1 billion supply
-        100, 200, 0,                                // Fees: 2% buy 1% sell 0% P2P
-        0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address
-        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48, // Base Token Address
-        msg.sender,                                 // AutoSwap Recipient
+        100, 200, 50,                               // Fees: 1% buy 2% sell 0.5% P2P
+        msg.sender,                                 // AutoSwap Receiver
+        0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D, // Router Address: Uniswap V2
+        0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48, // Base Token Address: USDC
         100)                                        // 1% in tokens before swap percent
     {
     }
@@ -96,8 +96,8 @@ contract MyBalancerFeeToken is BalancerV2FeeToken
     constructor() BalancerV2FeeToken(
         "My Token", "MTKN",     // Name and Symbol
         1_000_000_000 ether,    // 1 billion supply
-        address(this),          // Vault Address
-        100, 200, 0)            // Fees: 2% buy 1% sell 0% P2P
+        100, 200, 50,           // Fees: 2% buy 1% sell 0.5% P2P
+        msg.sender)             // Fee Receiver
     {
     }
 }
@@ -118,10 +118,10 @@ contract MyUniswapV3FeeToken is UniswapV3FeeToken
     constructor() UniswapV3FeeToken(
         "My Token", "MTKN",                         // Name and Symbol
         1_000_000_000 ether,                        // 1 billion supply
-        msg.sender,                                 // Vault Address
         100, 200,                                   // Fees: 1% buy 2% P2P
+        msg.sender,                                 // Vault Address
         0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2, // Base token: WETH
-        1000)                                       // Initial rate: 1 Base Tokens = 1000 tokens
+        1000)                                       // Initial rate: 1 WETH = 1000 tokens
     {
     }
 }

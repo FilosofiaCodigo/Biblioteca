@@ -4,12 +4,12 @@
 pragma solidity ^0.8.0;
 
 import "./ERC20.sol";
-import "./UniswapV2Interfaces.sol";
+import "./interfaces/UniswapV2Interfaces.sol";
 
 abstract contract UniswapV2FeeToken is ERC20
 {
     mapping(address => bool) public isTaxless;
-    address public feeReceiverAddress;
+    address public feeReceiver;
     bool public isFeeActive;
     uint[] public fees;
     uint public feeDecimals = 2;
@@ -20,8 +20,8 @@ abstract contract UniswapV2FeeToken is ERC20
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
-        address feeReceiverAddress_,
         uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
+        address feeReceiver_,
         address routerAddress,
         address baseTokenAddress) ERC20(name, symbol, totalSupply_)
     {
@@ -29,11 +29,11 @@ abstract contract UniswapV2FeeToken is ERC20
         pair = ISwapFactory(router.factory()).createPair(address(this), baseTokenAddress);
         baseToken = IERC20(baseTokenAddress);
     
-        feeReceiverAddress = feeReceiverAddress_;
+        feeReceiver = feeReceiver_;
         
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
-        isTaxless[feeReceiverAddress] = true;
+        isTaxless[feeReceiver] = true;
         isTaxless[address(0)] = true;
 
         fees.push(buyFeePercentage);
@@ -59,9 +59,9 @@ abstract contract UniswapV2FeeToken is ERC20
 
         amount -= feesCollected;
         _balances[from] -= feesCollected;
-        _balances[feeReceiverAddress] += feesCollected;
+        _balances[feeReceiver] += feesCollected;
 
-        emit Transfer(from, feeReceiverAddress, amount);
+        emit Transfer(from, feeReceiver, amount);
     
         super._transfer(from, to, amount);
     }
@@ -71,9 +71,9 @@ abstract contract UniswapV2FeeToken is ERC20
         isTaxless[account] = isTaxless_;
     }
 
-    function _setFeeReceiverAddress(address feeReceiverAddress_) internal
+    function _setFeeReceiver(address feeReceiver_) internal
     {
-        feeReceiverAddress = feeReceiverAddress_;
+        feeReceiver = feeReceiver_;
     }
 
     function _setFeeActive(bool isFeeActive_) internal

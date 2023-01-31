@@ -108,7 +108,7 @@ const {
         await myBalancerFeeToken.connect(walletA).transfer(walletB.address, ethers.utils.parseEther("100.0"))
         
         expect(
-          await myBalancerFeeToken.balanceOf(await myBalancerFeeToken.tokenVaultAddress())
+          await myBalancerFeeToken.balanceOf(await myBalancerFeeToken.feeReceiver())
         ).to.greaterThan(
           0
         );
@@ -141,7 +141,7 @@ const {
           timestamp + 100); // Deadline
         
         expect(
-          await myBalancerFeeToken.balanceOf(await myBalancerFeeToken.tokenVaultAddress())
+          await myBalancerFeeToken.balanceOf(await myBalancerFeeToken.feeReceiver())
         ).to.greaterThan(
           0
         );
@@ -176,7 +176,7 @@ const {
           timestamp + 100); // Deadline
         
         expect(
-          await myBalancerFeeToken.balanceOf(await myBalancerFeeToken.tokenVaultAddress())
+          await myBalancerFeeToken.balanceOf(await myBalancerFeeToken.feeReceiver())
         ).to.greaterThan(
           0
         );

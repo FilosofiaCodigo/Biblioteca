@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "../ERC721/ERC721aCollection.sol";
+import "../../ERC721/ERC721aCollection.sol";
 
 contract MyERC721aCollection is ERC721aCollection
 {

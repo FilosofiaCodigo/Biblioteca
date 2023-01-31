@@ -4,15 +4,15 @@
 pragma solidity ^0.8.0;
 
 import "./ERC20.sol";
-import "./UniswapV3Interfaces.sol";
+import "./interfaces/UniswapV3Interfaces.sol";
 
 abstract contract UniswapV3FeeToken is ERC20
 {
     mapping(address => bool) public isTaxless;
-    address public tokenVaultAddress;
+    address public feeReceiver;
     bool public isFeeActive;
-    uint buyFee;
-    uint p2pFee;
+    uint buyFeePercentage;
+    uint p2pFeePercentage;
     uint public feeDecimals = 2;
     IERC20 baseToken;
     address public pool1;
@@ -25,26 +25,21 @@ abstract contract UniswapV3FeeToken is ERC20
 
     constructor(string memory name, string memory symbol,
         uint totalSupply_,
-        address tokenVaultAddress_,
-        uint buyFee_, uint p2pFee_,
+        uint buyFeePercentage_, uint p2pFeePercentage_,
+        address feeReceiver_,
         address baseTokenAddress,
         uint160 rate) ERC20(name, symbol, totalSupply_)
     {
-        tokenVaultAddress = tokenVaultAddress_;
+        feeReceiver = feeReceiver_;
         baseToken = IERC20(baseTokenAddress);
         
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
-        isTaxless[tokenVaultAddress] = true;
+        isTaxless[feeReceiver] = true;
         isTaxless[address(0)] = true;
 
-        p2pFee = p2pFee_;
-        buyFee = buyFee_;
-
-        isTaxless[msg.sender] = true;
-        isTaxless[address(this)] = true;
-        isTaxless[tokenVaultAddress] = true;
-        isTaxless[address(0)] = true;
+        p2pFeePercentage = p2pFeePercentage_;
+        buyFeePercentage = buyFeePercentage_;
 
         address token0;
         address token1;
@@ -106,18 +101,18 @@ abstract contract UniswapV3FeeToken is ERC20
         if (!isTaxless[from] && !isTaxless[to]) {
             if(isPool(from))
             {
-                feesCollected = (amount * buyFee) / (10**(feeDecimals + 2));
+                feesCollected = (amount * buyFeePercentage) / (10**(feeDecimals + 2));
             }else if(!isPool(to))
             {
-                feesCollected = (amount * p2pFee) / (10**(feeDecimals + 2));
+                feesCollected = (amount * p2pFeePercentage) / (10**(feeDecimals + 2));
             }
         }
 
         amount -= feesCollected;
         _balances[from] -= feesCollected;
-        _balances[tokenVaultAddress] += feesCollected;
+        _balances[feeReceiver] += feesCollected;
 
-        emit Transfer(from, tokenVaultAddress, amount);
+        emit Transfer(from, feeReceiver, amount);
     
         super._transfer(from, to, amount);
     }

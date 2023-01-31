@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import "../ERC721/OpenZeppelinNFTCollection.sol";
+import "../../ERC721/OpenZeppelinNFTCollection.sol";
 
 contract MyOpenZeppelinNFTCollection is OpenZeppelinNFTCollection
 {
