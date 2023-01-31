@@ -19,6 +19,17 @@ Maximize interoperability for your smart contracts with the integrations library
 | | Aave Interface | ❌ | ❌ | ❌ |
 | | Sudoswap Interface | ❌ | ❌ | ❌ |
 
+# 🤔 Why Biblioteca?
+
+Our ultimate goal is to simplify access to information and bring people together through web3. That's why we are so passionate about building a library that connects people and protocols. We encourage you to experiment with the library yourself by launching [the examples](#-erc20-tokens) or to study the underliying prococols by exploring the [Unit Tests](https://github.com/FilosofiaCodigo/Biblioteca/tree/master/test). If you would like to contribute, PRs are welcome!
+
+# 🛡️ Running Tests & Coverage
+
+```
+npx hardhat test
+npx hardhat coverage
+```
+
 # 📝 Take note
 
 * This contracts are based on OpenZeppelin libraries but changed `private` variables to `internal` for flexibility

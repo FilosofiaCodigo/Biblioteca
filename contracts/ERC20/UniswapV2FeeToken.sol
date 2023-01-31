@@ -53,7 +53,11 @@ abstract contract UniswapV2FeeToken is ERC20
         if (isFeeActive && !isTaxless[from] && !isTaxless[to]) {
             bool sell = to == pair;
             bool p2p = from != pair && to != pair;
-            uint feeIndex = p2p ? 2 : sell ? 1 : 0;
+            uint feeIndex = 0;
+            if(p2p)
+                feeIndex = 2;
+            else if(sell)
+                feeIndex = 1;
             feesCollected = (amount * fees[feeIndex]) / (10**(feeDecimals + 2));
         }
 

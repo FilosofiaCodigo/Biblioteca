@@ -44,7 +44,11 @@ abstract contract BalancerV2FeeToken is ERC20
         if (isFeeActive && !isTaxless[from] && !isTaxless[to]) {
             bool sell = to == balancerVault;
             bool p2p = from != balancerVault && to != balancerVault;
-            uint feeIndex = p2p ? 2 : sell ? 1 : 0;
+            uint feeIndex = 0;
+            if(p2p)
+                feeIndex = 2;
+            else if(sell)
+                feeIndex = 1;
             feesCollected = (amount * fees[feeIndex]) / (10**(feeDecimals + 2));
         }
 
