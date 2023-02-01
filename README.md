@@ -30,6 +30,12 @@ npx hardhat test
 npx hardhat coverage
 ```
 
+# 🗎 Generate Documentation
+
+```
+npx hardhat docgen
+```
+
 # 📝 Take note
 
 * This contracts are based on OpenZeppelin libraries but changed `private` variables to `internal` for flexibility
