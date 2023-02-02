@@ -2,7 +2,7 @@
 
 ## BalancerV2FeeToken
 
-You can use this contract launch your own token or to study the Balancer ecosystem
+You can use this contract launch your own token or to study the Balancer ecosystem.
 
 _Based on top OpenZeppelin contracts but changed balances from private to internal for flexibility_
 
@@ -84,10 +84,10 @@ function _transfer(address from, address to, uint256 amount) internal virtual
 
 This functions is inherited from OpenZeppelin and implements the transaction fee distribution
 
-### setTaxless
+### _setTaxless
 
 ```solidity
-function setTaxless(address account, bool value) external
+function _setTaxless(address account, bool isTaxless_) internal
 ```
 
 Set excemptions for transaction fee payments
@@ -97,19 +97,49 @@ Set excemptions for transaction fee payments
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | account | address | Address that tax configuration will be affected |
-| value | bool | If set to true the account will not pay transaction fees |
+| isTaxless_ | bool | If set to true the account will not pay transaction fees |
 
-### setFeeActive
+### _setFeeReceiver
 
 ```solidity
-function setFeeActive(bool value) public
+function _setFeeReceiver(address feeReceiver_) internal
 ```
 
-Set excemptions for all transaction fee payments
+Changes the address that will recieve fees
 
 #### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| value | bool | If set to true all transaction fees will not be charged |
+| feeReceiver_ | address | If set to true the account will not pay transaction fees |
+
+### _setFeeActive
+
+```solidity
+function _setFeeActive(bool isFeeActive_) internal
+```
+
+Changes the address that will recieve fees
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| isFeeActive_ | bool | If set to true all transaction fees will not be charged |
+
+### _setFees
+
+```solidity
+function _setFees(uint256 buyFeePercentage, uint256 sellFeePercentage, uint256 p2pFeePercentage) internal
+```
+
+The fee percentage for buy, sell and peer to peer
+
+#### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| buyFeePercentage | uint256 | New buy percentage fee |
+| sellFeePercentage | uint256 | New sell percentage fee |
+| p2pFeePercentage | uint256 | New peer to peer percentage fee |
 

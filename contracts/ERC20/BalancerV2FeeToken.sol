@@ -6,11 +6,10 @@ pragma solidity ^0.8.0;
 import "./ERC20.sol";
 import "./interfaces/BalancerInterfaces.sol";
 
-/// @title ERC20 token that takes fees on P2P, buy and sell on Balancer and transfer them to a Vault.
+/// @title ERC20 token that takes fees on P2P, buy and sell on Balancer and transfer them to the feeReceiver.
 /// @author Filosofía Codigo
-/// @notice You can use this contract launch your own token or to study the Balancer ecosystem
+/// @notice You can use this contract launch your own token or to study the Balancer ecosystem.
 /// @dev Based on top OpenZeppelin contracts but changed balances from private to internal for flexibility
-/// @custom:experimental This is an experimental contract.
 abstract contract BalancerV2FeeToken is ERC20
 {
     /// @notice List of address that won't pay transaction fees
@@ -84,16 +83,38 @@ abstract contract BalancerV2FeeToken is ERC20
 
     /// @notice Set excemptions for transaction fee payments
     /// @param account Address that tax configuration will be affected
-    /// @param value If set to true the account will not pay transaction fees
-    /// @custom:ownable This function can only be executed by the contract owner.
-    function setTaxless(address account, bool value) external onlyOwner {
-        isTaxless[account] = value;
+    /// @param isTaxless_ If set to true the account will not pay transaction fees
+    /// @custom:internal This function is internal, can be overrided.
+    function _setTaxless(address account, bool isTaxless_) internal
+    {
+        isTaxless[account] = isTaxless_;
     }
 
-    /// @notice Set excemptions for all transaction fee payments
-    /// @param value If set to true all transaction fees will not be charged
-    /// @custom:ownable This function can only be executed by the contract owner.
-    function setFeeActive(bool value) public onlyOwner {
-        isFeeActive = value;
+    /// @notice Changes the address that will recieve fees
+    /// @param feeReceiver_ If set to true the account will not pay transaction fees
+    /// @custom:internal This function is internal, can be overrided.
+    function _setFeeReceiver(address feeReceiver_) internal
+    {
+        feeReceiver = feeReceiver_;
+    }
+
+    /// @notice Changes the address that will recieve fees
+    /// @param isFeeActive_ If set to true all transaction fees will not be charged
+    /// @custom:internal This function is internal, can be overrided.
+    function _setFeeActive(bool isFeeActive_) internal
+    {
+        isFeeActive = isFeeActive_;
+    }
+
+    /// @notice The fee percentage for buy, sell and peer to peer
+    /// @param buyFeePercentage New buy percentage fee
+    /// @param sellFeePercentage New sell percentage fee
+    /// @param p2pFeePercentage New peer to peer percentage fee
+    /// @custom:internal This function is internal, can be overrided.
+    function _setFees(uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage) internal
+    {
+        fees[0] = buyFeePercentage;
+        fees[1] = sellFeePercentage;
+        fees[2] = p2pFeePercentage;
     }
 }
