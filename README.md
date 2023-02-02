@@ -72,6 +72,8 @@ contract MyUniswapV2FeeToken is UniswapV2FeeToken
 }
 ```
 
+See full [API documentation](https://github.com/FilosofiaCodigo/Biblioteca/blob/master/docs/ERC20/UniswapV2FeeToken.md).
+
 
 ## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="20"/> Uniswap V2 AutoSwap Token
 
@@ -98,6 +100,8 @@ contract MyUniswapV2AutoSwapToken is UniswapV2AutoSwapToken
 }
 ```
 
+See full [API documentation](https://github.com/FilosofiaCodigo/Biblioteca/blob/master/docs/ERC20/UniswapV2AutoSwapToken.md).
+
 ## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/balancer.png" width="20"/> Balancer V2 Fee Token
 
 ERC20 token that takes fees on P2P, buy and sell on Balancer and transfer them to a Vault.
@@ -119,6 +123,8 @@ contract MyBalancerFeeToken is BalancerV2FeeToken
     }
 }
 ```
+
+See full [API documentation](https://github.com/FilosofiaCodigo/Biblioteca/blob/master/docs/ERC20/BalancerV2FeeToken.md).
 
 ## <img src="https://raw.githubusercontent.com/FilosofiaCodigo/Biblioteca/master/img/icons/uniswap.png" width="20"/> Uniswap V3 Fee Token
 
@@ -143,6 +149,8 @@ contract MyUniswapV3FeeToken is UniswapV3FeeToken
     }
 }
 ```
+
+See full [API documentation](https://github.com/FilosofiaCodigo/Biblioteca/blob/master/docs/ERC20/UniswapV3FeeToken.md).
 
 # 🖼️ NFT Collections
 
