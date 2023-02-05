@@ -10,8 +10,7 @@ import "./interfaces/UniswapV3Interfaces.sol";
 /// @author Filosofía Codigo
 /// @notice You can use this contract launch your own token or to study the Uniswap V3 ecosystem.
 /// @dev Based on top OpenZeppelin contracts but changed balances from private to internal for flexibility
-abstract contract UniswapV3FeeToken is ERC20
-{
+abstract contract UniswapV3FeeToken is ERC20 {
     /// @notice List of address that won't pay transaction fees
     mapping(address => bool) public isTaxless;
     /// @notice Address that will recieve fees taken from each transaction
@@ -36,8 +35,8 @@ abstract contract UniswapV3FeeToken is ERC20
     address public pool4;
 
     /// @notice Uniswap V3 Position Manager used to gather the pool addresses
-    INonfungiblePositionManager public nonfungiblePositionManager
-        = INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
+    INonfungiblePositionManager public nonfungiblePositionManager =
+        INonfungiblePositionManager(0xC36442b4a4522E871399CD717aBDD847Ab11FE88);
 
     /// @notice Contract constructor
     /// @dev All percentage numbers are two digit decimals. For example 250 means 2.5%
@@ -49,16 +48,19 @@ abstract contract UniswapV3FeeToken is ERC20
     /// @param feeReceiver_ Address that will recieve the fees taken every transaction
     /// @param baseTokenAddress Token address that this will be paired with on the DEX. Fees will be sent to the autoSwapReciever in the base token denomination
     /// @param rate Initial token value in the form of 1 base token = `rate` tokens
-    constructor(string memory name, string memory symbol,
+    constructor(
+        string memory name,
+        string memory symbol,
         uint totalSupply_,
-        uint buyFeePercentage_, uint p2pFeePercentage_,
+        uint buyFeePercentage_,
+        uint p2pFeePercentage_,
         address feeReceiver_,
         address baseTokenAddress,
-        uint160 rate) ERC20(name, symbol, totalSupply_)
-    {
+        uint160 rate
+    ) ERC20(name, symbol, totalSupply_) {
         feeReceiver = feeReceiver_;
         baseToken = IERC20(baseTokenAddress);
-        
+
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
         isTaxless[feeReceiver] = true;
@@ -69,12 +71,10 @@ abstract contract UniswapV3FeeToken is ERC20
 
         address token0;
         address token1;
-        if(address(this) < baseTokenAddress)
-        {
+        if (address(this) < baseTokenAddress) {
             token0 = address(this);
             token1 = baseTokenAddress;
-        }else
-        {
+        } else {
             token0 = baseTokenAddress;
             token1 = address(this);
         }
@@ -82,37 +82,35 @@ abstract contract UniswapV3FeeToken is ERC20
         uint160 RATE = rate;
         uint160 sqrtPriceX96;
 
-        if(token0 == baseTokenAddress)
-        {
+        if (token0 == baseTokenAddress) {
             sqrtPriceX96 = uint160(sqrt(RATE)) * 2 ** 96;
-        }else
-        {
+        } else {
             sqrtPriceX96 = (2 ** 96) / uint160(sqrt(RATE));
         }
 
         pool1 = nonfungiblePositionManager.createAndInitializePoolIfNecessary(
             token0,
             token1,
-            100/* fee */,
-            sqrtPriceX96//Math.sqrt("1") * 2 ** 96
+            100 /* fee */,
+            sqrtPriceX96 //Math.sqrt("1") * 2 ** 96
         );
         pool2 = nonfungiblePositionManager.createAndInitializePoolIfNecessary(
             token0,
             token1,
-            500/* fee */,
-            sqrtPriceX96//Math.sqrt("1") * 2 ** 96
+            500 /* fee */,
+            sqrtPriceX96 //Math.sqrt("1") * 2 ** 96
         );
         pool3 = nonfungiblePositionManager.createAndInitializePoolIfNecessary(
             token0,
             token1,
-            3000/* fee */,
-            sqrtPriceX96//Math.sqrt("1") * 2 ** 96
+            3000 /* fee */,
+            sqrtPriceX96 //Math.sqrt("1") * 2 ** 96
         );
         pool4 = nonfungiblePositionManager.createAndInitializePoolIfNecessary(
             token0,
             token1,
-            10000/* fee */,
-            sqrtPriceX96//Math.sqrt("1") * 2 ** 96
+            10000 /* fee */,
+            sqrtPriceX96 //Math.sqrt("1") * 2 ** 96
         );
 
         isFeeActive = true;
@@ -126,12 +124,14 @@ abstract contract UniswapV3FeeToken is ERC20
     ) internal virtual override {
         uint256 feesCollected;
         if (!isTaxless[from] && !isTaxless[to]) {
-            if(_isPool(from))
-            {
-                feesCollected = (amount * buyFeePercentage) / (10**(feeDecimals + 2));
-            }else if(!_isPool(to))
-            {
-                feesCollected = (amount * p2pFeePercentage) / (10**(feeDecimals + 2));
+            if (_isPool(from)) {
+                feesCollected =
+                    (amount * buyFeePercentage) /
+                    (10 ** (feeDecimals + 2));
+            } else if (!_isPool(to)) {
+                feesCollected =
+                    (amount * p2pFeePercentage) /
+                    (10 ** (feeDecimals + 2));
             }
         }
 
@@ -140,14 +140,17 @@ abstract contract UniswapV3FeeToken is ERC20
         _balances[feeReceiver] += feesCollected;
 
         emit Transfer(from, feeReceiver, amount);
-    
+
         super._transfer(from, to, amount);
     }
 
     /// @dev Checks if an address is part of the Uniswap V3 pools. This is for internal use.
-    function _isPool(address _address) internal view returns(bool)
-    {
-        return _address == pool1 || _address == pool2 || _address == pool3 || _address == pool4;
+    function _isPool(address _address) internal view returns (bool) {
+        return
+            _address == pool1 ||
+            _address == pool2 ||
+            _address == pool3 ||
+            _address == pool4;
     }
 
     /// @dev Square root function for internal use
@@ -168,24 +171,21 @@ abstract contract UniswapV3FeeToken is ERC20
     /// @param account Address that tax configuration will be affected
     /// @param isTaxless_ If set to true the account will not pay transaction fees
     /// @custom:internal This function is internal, can be overrided.
-    function _setTaxless(address account, bool isTaxless_) internal
-    {
+    function _setTaxless(address account, bool isTaxless_) internal {
         isTaxless[account] = isTaxless_;
     }
 
     /// @notice Changes the address that will recieve fees
     /// @param feeReceiver_ If set to true the account will not pay transaction fees
     /// @custom:internal This function is internal, can be overrided.
-    function _setFeeReceiver(address feeReceiver_) internal
-    {
+    function _setFeeReceiver(address feeReceiver_) internal {
         feeReceiver = feeReceiver_;
     }
 
     /// @notice Changes the address that will recieve fees
     /// @param isFeeActive_ If set to true all transaction fees will not be charged
     /// @custom:internal This function is internal, can be overrided.
-    function _setFeeActive(bool isFeeActive_) internal
-    {
+    function _setFeeActive(bool isFeeActive_) internal {
         isFeeActive = isFeeActive_;
     }
 
@@ -193,8 +193,7 @@ abstract contract UniswapV3FeeToken is ERC20
     /// @param buyFeePercentage_ New buy percentage fee
     /// @param p2pFeePercentage_ New peer to peer percentage fee
     /// @custom:internal This function is internal, can be overrided.
-    function _setFees(uint buyFeePercentage_, uint p2pFeePercentage_) internal
-    {
+    function _setFees(uint buyFeePercentage_, uint p2pFeePercentage_) internal {
         buyFeePercentage = buyFeePercentage_;
         p2pFeePercentage = p2pFeePercentage_;
     }

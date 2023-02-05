@@ -10,8 +10,7 @@ import "./interfaces/BalancerInterfaces.sol";
 /// @author Filosofía Codigo
 /// @notice You can use this contract launch your own token or to study the Balancer ecosystem.
 /// @dev Based on top OpenZeppelin contracts but changed balances from private to internal for flexibility
-abstract contract BalancerV2FeeToken is ERC20
-{
+abstract contract BalancerV2FeeToken is ERC20 {
     /// @notice List of address that won't pay transaction fees
     mapping(address => bool) public isTaxless;
     /// @notice Address that will recieve fees taken from each transaction
@@ -34,14 +33,17 @@ abstract contract BalancerV2FeeToken is ERC20
     /// @param sellFeePercentage Percent of tokens that will be sent to the feeReciever when token is sold on Balancer
     /// @param p2pFeePercentage Percent of tokens that will be sent to the feeReciever when token is transfered outside of Balancer
     /// @param feeReceiver_ Address that will recieve the fees taken every transaction
-    constructor(string memory name, string memory symbol,
+    constructor(
+        string memory name,
+        string memory symbol,
         uint totalSupply_,
-        uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
-        address feeReceiver_)
-        ERC20(name, symbol, totalSupply_)
-    {
+        uint buyFeePercentage,
+        uint sellFeePercentage,
+        uint p2pFeePercentage,
+        address feeReceiver_
+    ) ERC20(name, symbol, totalSupply_) {
         feeReceiver = feeReceiver_;
-        
+
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
         isTaxless[feeReceiver] = true;
@@ -50,7 +52,7 @@ abstract contract BalancerV2FeeToken is ERC20
         fees.push(buyFeePercentage);
         fees.push(sellFeePercentage);
         fees.push(p2pFeePercentage);
-        
+
         isFeeActive = true;
     }
 
@@ -65,11 +67,11 @@ abstract contract BalancerV2FeeToken is ERC20
             bool sell = to == balancerVault;
             bool p2p = from != balancerVault && to != balancerVault;
             uint feeIndex = 0;
-            if(p2p)
-                feeIndex = 2;
-            else if(sell)
-                feeIndex = 1;
-            feesCollected = (amount * fees[feeIndex]) / (10**(feeDecimals + 2));
+            if (p2p) feeIndex = 2;
+            else if (sell) feeIndex = 1;
+            feesCollected =
+                (amount * fees[feeIndex]) /
+                (10 ** (feeDecimals + 2));
         }
 
         amount -= feesCollected;
@@ -77,7 +79,7 @@ abstract contract BalancerV2FeeToken is ERC20
         _balances[feeReceiver] += feesCollected;
 
         emit Transfer(from, feeReceiver, amount);
-    
+
         super._transfer(from, to, amount);
     }
 
@@ -85,24 +87,21 @@ abstract contract BalancerV2FeeToken is ERC20
     /// @param account Address that tax configuration will be affected
     /// @param isTaxless_ If set to true the account will not pay transaction fees
     /// @custom:internal This function is internal, can be overrided.
-    function _setTaxless(address account, bool isTaxless_) internal
-    {
+    function _setTaxless(address account, bool isTaxless_) internal {
         isTaxless[account] = isTaxless_;
     }
 
     /// @notice Changes the address that will recieve fees
     /// @param feeReceiver_ If set to true the account will not pay transaction fees
     /// @custom:internal This function is internal, can be overrided.
-    function _setFeeReceiver(address feeReceiver_) internal
-    {
+    function _setFeeReceiver(address feeReceiver_) internal {
         feeReceiver = feeReceiver_;
     }
 
     /// @notice Changes the address that will recieve fees
     /// @param isFeeActive_ If set to true all transaction fees will not be charged
     /// @custom:internal This function is internal, can be overrided.
-    function _setFeeActive(bool isFeeActive_) internal
-    {
+    function _setFeeActive(bool isFeeActive_) internal {
         isFeeActive = isFeeActive_;
     }
 
@@ -111,8 +110,11 @@ abstract contract BalancerV2FeeToken is ERC20
     /// @param sellFeePercentage New sell percentage fee
     /// @param p2pFeePercentage New peer to peer percentage fee
     /// @custom:internal This function is internal, can be overrided.
-    function _setFees(uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage) internal
-    {
+    function _setFees(
+        uint buyFeePercentage,
+        uint sellFeePercentage,
+        uint p2pFeePercentage
+    ) internal {
         fees[0] = buyFeePercentage;
         fees[1] = sellFeePercentage;
         fees[2] = p2pFeePercentage;

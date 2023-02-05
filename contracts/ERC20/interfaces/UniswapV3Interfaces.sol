@@ -15,14 +15,12 @@ struct ExactInputSingleParams {
 }
 
 interface IUniswapV3Router {
-    function exactInputSingle(ExactInputSingleParams calldata params)
-        external
-        payable
-        returns (uint amountOut);
+    function exactInputSingle(
+        ExactInputSingleParams calldata params
+    ) external payable returns (uint amountOut);
 }
 
 interface INonfungiblePositionManager {
-
     function createAndInitializePoolIfNecessary(
         address token0,
         address token1,
@@ -44,15 +42,12 @@ interface INonfungiblePositionManager {
         uint deadline;
     }
 
-    function mint(MintParams calldata params)
+    function mint(
+        MintParams calldata params
+    )
         external
         payable
-        returns (
-            uint tokenId,
-            uint128 liquidity,
-            uint amount0,
-            uint amount1
-        );
+        returns (uint tokenId, uint128 liquidity, uint amount0, uint amount1);
 
     struct IncreaseLiquidityParams {
         uint tokenId;
@@ -63,14 +58,9 @@ interface INonfungiblePositionManager {
         uint deadline;
     }
 
-    function increaseLiquidity(IncreaseLiquidityParams calldata params)
-        external
-        payable
-        returns (
-            uint128 liquidity,
-            uint amount0,
-            uint amount1
-        );
+    function increaseLiquidity(
+        IncreaseLiquidityParams calldata params
+    ) external payable returns (uint128 liquidity, uint amount0, uint amount1);
 
     struct DecreaseLiquidityParams {
         uint tokenId;
@@ -80,10 +70,9 @@ interface INonfungiblePositionManager {
         uint deadline;
     }
 
-    function decreaseLiquidity(DecreaseLiquidityParams calldata params)
-        external
-        payable
-        returns (uint amount0, uint amount1);
+    function decreaseLiquidity(
+        DecreaseLiquidityParams calldata params
+    ) external payable returns (uint amount0, uint amount1);
 
     struct CollectParams {
         uint tokenId;
@@ -92,14 +81,12 @@ interface INonfungiblePositionManager {
         uint128 amount1Max;
     }
 
-    function collect(CollectParams calldata params)
-        external
-        payable
-        returns (uint amount0, uint amount1);
+    function collect(
+        CollectParams calldata params
+    ) external payable returns (uint amount0, uint amount1);
 }
 
-abstract contract IUniswapV3Pool
-{
+abstract contract IUniswapV3Pool {
     struct Slot0 {
         // the current price
         uint160 sqrtPriceX96;
@@ -120,19 +107,22 @@ abstract contract IUniswapV3Pool
     //Slot0 public slot0;
 
     uint24 public fee;
+
     //int24 public tickSpacing;
 
+    function slot0()
+        external
+        view
+        virtual
+        returns (
+            uint160 sqrtPriceX96,
+            int24 tick,
+            uint16 observationIndex,
+            uint16 observationCardinality,
+            uint16 observationCardinalityNext,
+            uint8 feeProtocol,
+            bool unlocked
+        );
 
-    function slot0(
-    ) external virtual view returns 
-        (
-            uint160 sqrtPriceX96, 
-            int24 tick, 
-            uint16 observationIndex, 
-            uint16 observationCardinality, 
-            uint16 observationCardinalityNext, 
-            uint8 feeProtocol, 
-            bool unlocked);
-    
-    function tickSpacing() external virtual view returns (int24);
+    function tickSpacing() external view virtual returns (int24);
 }

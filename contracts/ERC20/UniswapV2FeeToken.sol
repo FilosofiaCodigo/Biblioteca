@@ -10,8 +10,7 @@ import "./interfaces/UniswapV2Interfaces.sol";
 /// @author Filosofía Codigo
 /// @notice You can use this contract launch your own token or to study the Uniswap V2 ecosystem.
 /// @dev Based on top OpenZeppelin contracts but changed balances from private to internal for flexibility
-abstract contract UniswapV2FeeToken is ERC20
-{
+abstract contract UniswapV2FeeToken is ERC20 {
     /// @notice List of address that won't pay transaction fees
     mapping(address => bool) public isTaxless;
     /// @notice Address that will recieve fees taken from each transaction
@@ -40,19 +39,26 @@ abstract contract UniswapV2FeeToken is ERC20
     /// @param feeReceiver_ Address that will recieve the fees taken every transaction
     /// @param routerAddress You can support such DEXes by setting the router address in this param. Many projects such as Pancakeswap, Sushiswap or Quickswap are compatible with Uniswap V2
     /// @param baseTokenAddress Token address that this will be paired with on the DEX. Fees will be sent to the autoSwapReciever in the base token denomination
-    constructor(string memory name, string memory symbol,
+    constructor(
+        string memory name,
+        string memory symbol,
         uint totalSupply_,
-        uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
+        uint buyFeePercentage,
+        uint sellFeePercentage,
+        uint p2pFeePercentage,
         address feeReceiver_,
         address routerAddress,
-        address baseTokenAddress) ERC20(name, symbol, totalSupply_)
-    {
+        address baseTokenAddress
+    ) ERC20(name, symbol, totalSupply_) {
         router = ISwapRouter(routerAddress);
-        pair = ISwapFactory(router.factory()).createPair(address(this), baseTokenAddress);
+        pair = ISwapFactory(router.factory()).createPair(
+            address(this),
+            baseTokenAddress
+        );
         baseToken = IERC20(baseTokenAddress);
-    
+
         feeReceiver = feeReceiver_;
-        
+
         isTaxless[msg.sender] = true;
         isTaxless[address(this)] = true;
         isTaxless[feeReceiver] = true;
@@ -61,7 +67,7 @@ abstract contract UniswapV2FeeToken is ERC20
         fees.push(buyFeePercentage);
         fees.push(sellFeePercentage);
         fees.push(p2pFeePercentage);
-        
+
         isFeeActive = true;
     }
 
@@ -70,18 +76,17 @@ abstract contract UniswapV2FeeToken is ERC20
         address from,
         address to,
         uint256 amount
-    ) internal virtual override
-    {
+    ) internal virtual override {
         uint256 feesCollected;
         if (isFeeActive && !isTaxless[from] && !isTaxless[to]) {
             bool sell = to == pair;
             bool p2p = from != pair && to != pair;
             uint feeIndex = 0;
-            if(p2p)
-                feeIndex = 2;
-            else if(sell)
-                feeIndex = 1;
-            feesCollected = (amount * fees[feeIndex]) / (10**(feeDecimals + 2));
+            if (p2p) feeIndex = 2;
+            else if (sell) feeIndex = 1;
+            feesCollected =
+                (amount * fees[feeIndex]) /
+                (10 ** (feeDecimals + 2));
         }
 
         amount -= feesCollected;
@@ -89,7 +94,7 @@ abstract contract UniswapV2FeeToken is ERC20
         _balances[feeReceiver] += feesCollected;
 
         emit Transfer(from, feeReceiver, amount);
-    
+
         super._transfer(from, to, amount);
     }
 
@@ -97,24 +102,21 @@ abstract contract UniswapV2FeeToken is ERC20
     /// @param account Address that tax configuration will be affected
     /// @param isTaxless_ If set to true the account will not pay transaction fees
     /// @custom:internal This function is internal, can be overrided.
-    function _setTaxless(address account, bool isTaxless_) internal
-    {
+    function _setTaxless(address account, bool isTaxless_) internal {
         isTaxless[account] = isTaxless_;
     }
 
     /// @notice Changes the address that will recieve fees
     /// @param feeReceiver_ If set to true the account will not pay transaction fees
     /// @custom:internal This function is internal, can be overrided.
-    function _setFeeReceiver(address feeReceiver_) internal
-    {
+    function _setFeeReceiver(address feeReceiver_) internal {
         feeReceiver = feeReceiver_;
     }
 
     /// @notice Changes the address that will recieve fees
     /// @param isFeeActive_ If set to true all transaction fees will not be charged
     /// @custom:internal This function is internal, can be overrided.
-    function _setFeeActive(bool isFeeActive_) internal
-    {
+    function _setFeeActive(bool isFeeActive_) internal {
         isFeeActive = isFeeActive_;
     }
 
@@ -123,8 +125,11 @@ abstract contract UniswapV2FeeToken is ERC20
     /// @param sellFeePercentage New sell percentage fee
     /// @param p2pFeePercentage New peer to peer percentage fee
     /// @custom:internal This function is internal, can be overrided.
-    function _setFees(uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage) internal
-    {
+    function _setFees(
+        uint buyFeePercentage,
+        uint sellFeePercentage,
+        uint p2pFeePercentage
+    ) internal {
         fees[0] = buyFeePercentage;
         fees[1] = sellFeePercentage;
         fees[2] = p2pFeePercentage;
@@ -134,14 +139,18 @@ abstract contract UniswapV2FeeToken is ERC20
     /// @param router_ New router that will be updated
     /// @param baseToken_ New base token that will be used
     /// @custom:internal This function is internal, can be overrided.
-    function _setPair(address router_, address baseToken_) internal
-    {
+    function _setPair(address router_, address baseToken_) internal {
         router = ISwapRouter(router_);
         baseToken = IERC20(baseToken_);
-        pair = ISwapFactory(router.factory()).getPair(address(this), address(baseToken));
-        if(pair == address(0))
-        {
-            pair = ISwapFactory(router.factory()).createPair(address(this), address(baseToken));
+        pair = ISwapFactory(router.factory()).getPair(
+            address(this),
+            address(baseToken)
+        );
+        if (pair == address(0)) {
+            pair = ISwapFactory(router.factory()).createPair(
+                address(this),
+                address(baseToken)
+            );
         }
     }
 }

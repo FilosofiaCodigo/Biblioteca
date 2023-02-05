@@ -10,8 +10,7 @@ import "./interfaces/UniswapV2Interfaces.sol";
 /// @author Filosofía Codigo
 /// @notice You can use this contract launch your own token or to study the Uniswap V2 ecosystem.
 /// @dev Based on top OpenZeppelin contracts but changed balances from private to internal for flexibility
-abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
-{
+abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken {
     /// @notice Percentage of total supply that have to be accumulated as fees to trigger the autoswap and send the fees to the autoSwapReciever
     uint256 public minTokensBeforeSwap;
     /// @notice Address that will recieve fees on base token denomination
@@ -33,18 +32,28 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
     /// @param routerAddress You can support such DEXes by setting the router address in this param. Many projects such as Pancakeswap, Sushiswap or Quickswap are compatible with Uniswap V2
     /// @param baseTokenAddress Token address that this will be paired with on the DEX. Fees will be sent to the autoSwapReciever in the base token denomination
     /// @param minTokensBeforeSwapPercent Percentage of total supply that have to be accumulated as fees to trigger the autoswap and send the fees to the autoSwapReciever
-    constructor(string memory name, string memory symbol,
+    constructor(
+        string memory name,
+        string memory symbol,
         uint totalSupply_,
-        uint buyFeePercentage, uint sellFeePercentage, uint p2pFeePercentage,
+        uint buyFeePercentage,
+        uint sellFeePercentage,
+        uint p2pFeePercentage,
         address autoSwapReciever_,
         address routerAddress,
         address baseTokenAddress,
-        uint minTokensBeforeSwapPercent) UniswapV2FeeToken(name, symbol,
-        totalSupply_,
-        buyFeePercentage, sellFeePercentage, p2pFeePercentage,
-        address(this),
-        routerAddress,
-        baseTokenAddress
+        uint minTokensBeforeSwapPercent
+    )
+        UniswapV2FeeToken(
+            name,
+            symbol,
+            totalSupply_,
+            buyFeePercentage,
+            sellFeePercentage,
+            p2pFeePercentage,
+            address(this),
+            routerAddress,
+            baseTokenAddress
         )
     {
         autoSwapReciever = autoSwapReciever_;
@@ -62,12 +71,12 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
     /// @dev Swaps all the fees collected to base tokens and send it to the autoSwapReciever
     function swap() private lockTheSwap {
         uint totalSwap = balanceOf(address(this));
-        if(minTokensBeforeSwap > totalSwap) return;
-        if(totalSwap <= 0) return;
+        if (minTokensBeforeSwap > totalSwap) return;
+        if (totalSwap <= 0) return;
 
         address[] memory sellPath = new address[](2);
         sellPath[0] = address(this);
-        sellPath[1] = address(baseToken);       
+        sellPath[1] = address(baseToken);
 
         _approve(address(this), address(router), totalSwap);
         router.swapExactTokensForTokensSupportingFeeOnTransferTokens(
@@ -77,7 +86,7 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
             autoSwapReciever,
             block.timestamp
         );
-        
+
         emit Swap(totalSwap);
     }
 
@@ -87,8 +96,7 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
         address to,
         uint256 amount
     ) internal virtual override {
-        if(isFeeActive)
-        {
+        if (isFeeActive) {
             swap();
         }
         super._transfer(from, to, amount);
@@ -96,7 +104,11 @@ abstract contract UniswapV2AutoSwapToken is UniswapV2FeeToken
 
     /// @notice Change the minimum ammount of fees collected to trigger the autoswap
     /// @param percentage Percentage of total supply that have to be accumulated as fees to trigger the autoswap and send the fees to the autoSwapReciever
-    function setMinTokensBeforeSwapPercent(uint256 percentage) public onlyOwner {
-        minTokensBeforeSwap = (totalSupply() * percentage) / (10**(feeDecimals + 2));
+    function setMinTokensBeforeSwapPercent(
+        uint256 percentage
+    ) public onlyOwner {
+        minTokensBeforeSwap =
+            (totalSupply() * percentage) /
+            (10 ** (feeDecimals + 2));
     }
 }

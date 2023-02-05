@@ -5,8 +5,7 @@ pragma solidity ^0.8.0;
 
 import "./ERC721a.sol";
 
-contract ERC721aCollection is ERC721A
-{
+contract ERC721aCollection is ERC721A {
     string BASE_URI;
     uint MAX_SUPPLY;
     uint PRICE;
@@ -19,8 +18,7 @@ contract ERC721aCollection is ERC721A
         string memory base_uri,
         uint max_supply,
         uint _price
-    ) ERC721A(name, symbol)
-    {
+    ) ERC721A(name, symbol) {
         BASE_URI = base_uri;
         MAX_SUPPLY = max_supply;
         PRICE = _price;
@@ -28,17 +26,15 @@ contract ERC721aCollection is ERC721A
 
     // Public functions
 
-    function mint(address account, uint amount) public payable
-    {
-        require(msg.value == price()*amount, "Invalid payment");
+    function mint(address account, uint amount) public payable {
+        require(msg.value == price() * amount, "Invalid payment");
         require(totalSupply() + amount < maxSupply(), "Max supply reached");
         _safeMint(account, amount);
     }
 
     // Owner functions
 
-    function withdraw() public onlyOwner
-    {
+    function withdraw() public onlyOwner {
         (bool success, ) = msg.sender.call{value: address(this).balance}("");
         require(success, "Transfer failed.");
     }

@@ -22,8 +22,7 @@ contract OpenZeppelinNFTCollection is BibliotecaERC721 {
         string memory base_uri,
         uint max_supply,
         uint _price
-    ) ERC721(name, symbol)
-    {
+    ) ERC721(name, symbol) {
         BASE_URI = base_uri;
         MAX_SUPPLY = max_supply;
         PRICE = _price;
@@ -31,12 +30,10 @@ contract OpenZeppelinNFTCollection is BibliotecaERC721 {
 
     // Public functions
 
-    function mint(address account, uint amount) public payable
-    {
-        require(msg.value == price()*amount, "Invalid payment");
+    function mint(address account, uint amount) public payable {
+        require(msg.value == price() * amount, "Invalid payment");
         require(totalSupply() + amount < maxSupply(), "Max supply reached");
-        for(uint i; i<amount; i++)
-        {
+        for (uint i; i < amount; i++) {
             _safeMint(account, _tokenIds.current());
             _tokenIds.increment();
         }
@@ -44,8 +41,7 @@ contract OpenZeppelinNFTCollection is BibliotecaERC721 {
 
     // Owner functions
 
-    function withdraw() public onlyOwner
-    {
+    function withdraw() public onlyOwner {
         (bool success, ) = msg.sender.call{value: address(this).balance}("");
         require(success, "Transfer failed.");
     }

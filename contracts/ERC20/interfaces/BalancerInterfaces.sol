@@ -12,7 +12,10 @@ struct JoinPoolRequest {
     bool fromInternalBalance;
 }
 
-enum SwapKind { GIVEN_IN, GIVEN_OUT }
+enum SwapKind {
+    GIVEN_IN,
+    GIVEN_OUT
+}
 
 struct SingleSwap {
     bytes32 poolId;
@@ -30,15 +33,13 @@ struct FundManagement {
     bool toInternalBalance;
 }
 
-interface IVault
-{
+interface IVault {
     function joinPool(
         bytes32 poolId,
         address sender,
         address recipient,
         JoinPoolRequest memory request
     ) external payable;
-
 
     function swap(
         SingleSwap memory singleSwap,
@@ -60,8 +61,8 @@ interface IWeightedPool2TokensFactory {
     ) external returns (address);
 }
 
-interface IWeightedPool
-{
+interface IWeightedPool {
     function getPoolId() external view returns (bytes32);
+
     function balanceOf(address account) external view returns (uint256);
 }
