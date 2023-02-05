@@ -8,13 +8,10 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version: [14.x]
-
     steps:
       - uses: actions/checkout@v3
       - name: Waffle Unit Tests
@@ -23,3 +20,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: export MAINNET_RPC_URL=${{ secrets.MAINNET_RPC_URL }}; npx hardhat test
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: npx hardhat coverage
+      - uses: codecov/codecov-action@v3
