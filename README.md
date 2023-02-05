@@ -3,6 +3,7 @@
 <a href="https://www.alchemy.com/"><img onclick="logBadgeClick()" id="badge-button" style="width:240px;height:53px" src="https://static.alchemyapi.io/images/marketing/badgeLight.png" alt="Alchemy Supercharged"/></a>
 
 ![workflow](https://github.com/FilosofiaCodigo/Biblioteca/actions/workflows/unit-tests.yml/badge.svg)
+[![Coverage Status](https://codecov.io/gh/FilosofiaCodigo/Biblioteca/graph/badge.svg)](https://codecov.io/gh/FilosofiaCodigo/Biblioteca)
 
 Maximize interoperability for your smart contracts with the integrations library for decentralized protocols.
 
